@@ -14,15 +14,21 @@ const getProducts = asyncHandler(async(req, res) => {
 // @route GET /api/products/:id
 // @access Public
 
-const getProductById = asyncHandler(async(req, res) => {
-    const product=await Product.findById(req.params.id);
+const getProductById = asyncHandler(async (req, res) => {
+    // NOTE: checking for valid ObjectId to prevent CastError moved to separate
+    // middleware. See README for more info.
+  
 
-    if(product){
-        return res.json(product);
-    }else {
-        res.status(404);
-        throw new Error('Product not found'); // this will be caught by the error handler
+const product = await Product.findById(req.params.id);
+if (product) {
+    return res.json(product);
+} else {
+      // NOTE: this will run if a valid ObjectId but no product was found
+      // i.e. product may be null
+      // if id is not found in the database, then checkMiddleware.js will catch it we have called checkMiddleware.js during routing
+      res.status(404);
+      throw new Error('Product not found');
     }
-});
+  });
 
 export {getProducts, getProductById};

@@ -1,23 +1,20 @@
-const notFound = (req,res,next)=>{
-    const error=new Error(`Not Found - ${req.originalUrl}`); //
-    res.status(404); 
-    next(error);
+const notFound = (req, res, next) => {
+  const error = new Error(`Not Found - ${req.originalUrl}`);
+  res.status(404);
+  next(error);
 };
 
-const errorHandler=(err, req, res, next)=>{
-    const statusCode=res.statusCode===200 ? 500 : res.statusCode;
-    let message=err.message;
+const errorHandler = (err, req, res, next) => {
+  let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  let message = err.message;
 
-    // check for mongoose bads object id error
+  // NOTE: checking for invalid ObjectId moved to it's own middleware
+  // See README for further info.
 
-    if(err.name==='castError' && err.kind==='ObjectId'){ // castError is the error name that mongoose throws when it cannot find the object id
-        statusCode=404;
-        message='Resource not found';
-    }
-
-    res.status(statusCode).json({
-        message,
-        stack: process.env.NODE_ENV==='production' ? null : err.stack,
-    });
+  res.status(statusCode).json({
+    message: message,
+    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+  });
 };
-export {notFound, errorHandler};
+
+export { notFound, errorHandler };
