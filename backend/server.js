@@ -15,9 +15,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/products', productRoutes); // send it to productRoutes.js when /api/products is called
-
 app.get('/api/products/:id',productRoutes);
-
+//app.use('/api/products', productRoutes);
 app.use(notFound);  // if we reach this point, it means that the request is not found
 
 app.use(errorHandler); // if we reach this point, it means that there is an error
