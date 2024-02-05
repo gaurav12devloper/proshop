@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
+/* import {useEffect, useState} from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product'; // component
-//import products from '../products'; // data
+//\\import products from '../products'; // data
 import axios from 'axios';
 
 const HomeScreen = () => {
@@ -27,18 +27,22 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen
+export default HomeScreen */
 
-/* import { Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product'; // component
-import { useGetProdcutsQuery } from '../slices/productsApiSlice.js';
+import { useGetProductsQuery } from '../slices/productsApiSlice.js';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 const HomeScreen = () => {
-  
-  const { data: products, isLoading, error } = useGetProdcutsQuery();
+
+  //{orginal-name: rename-variable} like {data: products}
+  const { data: products, isLoading, error } = useGetProductsQuery();
+
   return (
     <> 
-    { isLoading ? (<h2>Loading ...</h2>)
-     : error ? (<div>error?.data?.message || error.error </div>) : 
+    { isLoading ? (<Loader />)
+     : error ? (<message variant='danger'>{error?.data?. Message || error.error} </message>) : 
      (
       <>
       <h1>Latest Products</h1>
@@ -55,4 +59,4 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen; */
+export default HomeScreen;
