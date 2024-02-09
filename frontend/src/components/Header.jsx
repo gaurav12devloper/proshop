@@ -1,8 +1,10 @@
-import {Navbar,Nav,Container} from 'react-bootstrap';
+import {Badge ,Navbar,Nav,Container} from 'react-bootstrap';
 import {FaShoppingCart,FaUser} from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap'; // this is used to wrap the Nav.Link for that install npm i react-router-bootstrap
+import { useSelector } from 'react-redux'; 
 import logo from '../assets/logo.png';
 const Header = () => {
+    const { cartItems } = useSelector((state) => state.cart);
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
@@ -17,7 +19,11 @@ const Header = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
                             <LinkContainer to='/cart'>
-                                <Nav.Link><FaShoppingCart/>Cart</Nav.Link>
+                                <Nav.Link><FaShoppingCart/>Cart
+                                    {cartItems.length > 0 && (
+                                        <Badge pill bg='success' style={{ marginLeft: '5px'}}>{cartItems.length}</Badge> // pill is used to make the badge rounded and bg is used to give the background color to the badge and success is the color name
+                                    )}
+                                </Nav.Link>
                             </LinkContainer> {/* it is used to wrap the Nav.Link i.e it is used to make the Nav.Link clickable  without refreshing the page. */}
                             <LinkContainer to='/login'>
                                 <Nav.Link><FaUser/>Sign In</Nav.Link>

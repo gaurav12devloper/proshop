@@ -21,7 +21,6 @@ const ProductScreen = () => {
 
     // useGetProductDetailsQuery is a hook provided by RTK Query to fetch the product details from the server
     const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
-    console.log(product)
     const addToCartHandler = () => {
         dispatch(addToCart({...product, qty}));
         navigate('/cart');
