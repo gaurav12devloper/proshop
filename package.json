@@ -30,7 +30,8 @@
     "express": "^4.18.2",
     "i": "^0.3.7",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.1.1"
+    "mongoose": "^8.1.1",
+    "vconcol": "^1.0.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

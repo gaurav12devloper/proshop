@@ -1,13 +1,15 @@
 import jwt from 'jsonwebtoken';
 import asyncHandler from './asyncHandler.js';
 import User from '../models/userModel.js';
-
+import Concol from 'vconcol';
+const cc=new Concol();
 //protect routes 
 const protect=asyncHandler(async (req,res,next) => {
     let token;
     // Read the JWT from the cookies
     token=req.cookies.jwt; //  during setting token we have use name jwt that why we accesing here using jwt
-    console.log("tokrn req",token); 
+    //console.log("tokrn req",token); 
+    cc.success("token req : "+token);
     if(token){
         try{
             const decoded = jwt.verify(token,process.env.JWT_SECRET);

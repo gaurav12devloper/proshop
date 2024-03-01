@@ -14,8 +14,8 @@ import {addToCart} from '../slices/cartSlice';
 const ProductScreen = () => {
     const { id: productId } = useParams(); 
 
-    const dispatch = useDispatch(); 
-    const navigate= useNavigate();
+    const dispatch = useDispatch(); // useDispatch is used for storing data in stored
+    const navigate= useNavigate(); // useNavigate is used for navigating to the different pages
     const [qty, setQty] = useState(1);
 
 

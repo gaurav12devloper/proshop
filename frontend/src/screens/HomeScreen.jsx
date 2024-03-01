@@ -37,7 +37,7 @@ import Message from '../components/Message';
 const HomeScreen = () => {
 
   //{orginal-name: rename-variable} like {data: products}
-  const { data: products, isLoading, error } = useGetProductsQuery();
+  const { data: products, isLoading, error } = useGetProductsQuery(); // 
 
   return (
     <> 
