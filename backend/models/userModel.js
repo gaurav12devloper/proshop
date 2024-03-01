@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from 'bcryptjs'
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -20,6 +20,18 @@ const userSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
+});
+// now we create matchPassword function and call this function in usercontroler
+userSchema.methods.matchPassword=async function(enteredPassword){
+    return await bcrypt.compare(enteredPassword,this.password);
+}
+
+userSchema.pre('save', async function(next) {
+    if(!this.isModified('password')){
+        next();
+    }
+    const salt = await bcrypt.genSalt(10); // it will generate salt. and 10 is the number of rounds
+    this.password = await bcrypt.hash(this.password,salt);
 });
 
 const User = mongoose.model("user", userSchema);

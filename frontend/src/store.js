@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'; // configureStore is a function that takes in an object it provides a store
 import cartSliceReducer from './slices/cartSlice'; 
 import { apiSlice } from './slices/apiSlice';
-const store = configureStore({
+import authSliceReducer from './slices/authSlice'; // we have to import the slice reducer to add it to the store
+const store = configureStore({      
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer, 
         cart: cartSliceReducer,
+        auth : authSliceReducer, // we have to add the slice reducer to the store
     },
     
      // Adding the api middleware enables caching, invalidation, polling,
