@@ -15,6 +15,9 @@ const authSlice = createSlice({
         logout(state) {
             state.userinfo = null; // set the userinfo to null i.e remove from redux store
             localStorage.removeItem('userinfo'); // remove the userinfo from the local storage
+            // NOTE: here we need to also remove the cart from storage so the next
+            // logged in user doesn't inherit the previous users cart and shipping
+            localStorage.clear();
         }
     }
 });

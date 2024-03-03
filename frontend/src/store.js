@@ -4,7 +4,7 @@ import { apiSlice } from './slices/apiSlice';
 import authSliceReducer from './slices/authSlice'; // we have to import the slice reducer to add it to the store
 const store = configureStore({      
     reducer: {
-        [apiSlice.reducerPath]: apiSlice.reducer, 
+        [apiSlice.reducerPath]: apiSlice.reducer,  // we have to add the apiSlice reducer to the store
         cart: cartSliceReducer,
         auth : authSliceReducer, // we have to add the slice reducer to the store
     },

@@ -11,7 +11,7 @@ const CartScreen = () => {
     const cart = useSelector((state) => state.cart);
     const {cartItems} = cart;
 
-    const addToCarthandler=async(product,qty) => {
+    const addToCarthandler=async(product,qty) => { // it will increase or decrease product to the cart
         dispatch(addToCart({...product,qty}));  // dispatching the action to the storeit will store the product and the quantity in the store cartItems
     }
     const removeFromCarthandler=async(id) => {

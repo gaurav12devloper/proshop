@@ -7,6 +7,7 @@ import products from './data/products.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
+import orderRoutes from './routes/orderRoutes.js';
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -20,9 +21,14 @@ app.get('/', (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser()); // cookie parser middleware
-app.get('/api/products', productRoutes); // send it to productRoutes.js when /api/products is called
-app.use('/api/users', userRoutes); // send it to userRoutes.js when /api/users is called
-app.get('/api/products/:id',productRoutes);
+
+app.use('/api/products', productRoutes); //send it to productRoutes.js when /api/products is called
+app.use('/api/users', userRoutes); 
+app.use('/api/orders', orderRoutes);
+
+app.get('/api/config/paypal', (req, res) => 
+res.send({clientId: process.env.PAYPAL_CLIENT_ID}) // send the paypal client id to the frontend
+);
 
 app.use(notFound);  // if we reach this point, it means that the request is not found
 app.use(errorHandler); // if we reach this point, it means that there is an error
