@@ -5,7 +5,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({ //it will enject endpoin
     endpoints:(builder) => ({ 
         login: builder.mutation({ // mutation is used to send data to the server
             query: (data) => ({
-            url : `${USERS_URL}/auth`, 
+            url : `${USERS_URL}/auth`,   //api/users/auth
             method:'POST', // the method to send the data
             body:data // the data to send to the server
         }),
@@ -24,8 +24,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({ //it will enject endpoin
             method:'POST', // the method to send the data
         }),
      }),
+     profile: builder.mutation({
+        query: (data) => ({
+          url: `${USERS_URL}/profile`, // send request for profile update api/users/profile
+          method: 'PUT',
+          body: data,
+        }),
+      }),
      
     }),
 });
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation } = usersApiSlice; // export the hook to use it in the component
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useProfileMutation} = usersApiSlice; // export the hook to use it in the component

@@ -7,6 +7,11 @@ import './assets/styles/bootstrap.custom.css';
 import './assets/styles/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import OrderListScreen from './screens/admin/OrderListScreen';
+import AdminRoute from './components/AdminRoute';
+import ProductListScreen from './screens/admin/ProductListScreen';
+import ProductEditScreen from './screens/admin/ProductEditScreen.jsx';
 import PrivateRoute from './components/PrivateRoute';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -19,6 +24,7 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import ProfileScreen from './screens/ProfileScreen';
 const router=createBrowserRouter(createRoutesFromElements(
 <Route path="/" element={<App />}>
    <Route index={true} path="/" element={<HomeScreen/>} /> 
@@ -32,7 +38,15 @@ const router=createBrowserRouter(createRoutesFromElements(
       <Route path='/payment' element={<PaymentScreen />}/> { /* this is a private route if user is not loggin then he will not be able to show payment page */}
       <Route path='/placeorder' element={<PlaceOrderScreen/>} /> { /* this is a private route if user is not loggin then he will not be able to show place order page */}
       <Route path='/order/:id' element={<OrderScreen/>} /> 
+      <Route path='/profile' element={<ProfileScreen />} />
   </Route>
+
+  <Route path='' element={<AdminRoute />}> 
+      <Route path='/admin/orderlist' element={<OrderListScreen />} />
+      <Route path='/admin/productlist' element={<ProductListScreen />} />
+      <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
+  </Route>
+
 </Route>
 ));
 
