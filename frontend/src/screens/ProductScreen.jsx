@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link, } from 'react-router-dom';
 import { Form,Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 //import axios from 'axios';
 import { useGetProductDetailsQuery, useCreateReviewMutation } from '../slices/productsApiSlice';
 import {addToCart} from '../slices/cartSlice';
+import Meta from '../components/Meta';
 
 const ProductScreen = () => {
     const { id: productId } = useParams(); 
@@ -62,6 +63,7 @@ const ProductScreen = () => {
         { isLoading ? (<Loader />): 
         error ? (<Message variant='danger'>{error?.data?.message || error.error} </Message>) :
          ( <>
+            <Meta title={product.name} />
         <Row>
             <Col md={5}>
                 <Image src={product.image} alt={product.name} fluid />

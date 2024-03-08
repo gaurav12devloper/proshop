@@ -34,7 +34,6 @@ import { Link, useParams } from 'react-router-dom';
 import Product from '../components/Product'; // component
 import { useGetProductsQuery } from '../slices/productsApiSlice.js';
 import Loader from '../components/Loader';
-import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarausel';
 const HomeScreen = () => {

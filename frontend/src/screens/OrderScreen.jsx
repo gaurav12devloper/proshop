@@ -14,9 +14,9 @@ const OrderScreen = () => {
 // fetching the order details from the backend and refetch is used to refetch the data from the backend
     const { data: order, refetch, isLoading,error,} = useGetOrderDetailsQuery(orderId);
 
-    const [ payOrder, { isLoading: loadingPay, error: errorPay } ] = usePayOrderMutation();
+    const [ payOrder, { isLoading: loadingPay } ] = usePayOrderMutation();
 
-    const [ deliverOrder, {isLoading: loadingDeliver, error: errorDeliver}] = useDeliverOrderMutation();
+    const [ deliverOrder, {isLoading: loadingDeliver}] = useDeliverOrderMutation();
 
     const [{ isPending }, paypalDispatch]=usePayPalScriptReducer();
 

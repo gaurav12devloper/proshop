@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'; // useDispatch is used for storing data in stored and useSelectior is used for accessing data from stored
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
-import Concol from 'vconcol';
+
 import { useRegisterMutation } from '../slices/userApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import {toast} from 'react-toastify';
@@ -13,7 +13,6 @@ const RegisterScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const concol = new Concol();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
