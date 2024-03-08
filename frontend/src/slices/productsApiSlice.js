@@ -4,9 +4,11 @@ import { apiSlice } from "./apiSlice";
 export const productApiSlice = apiSlice.injectEndpoints({ //it will enject endpoint into the apiSlice
     endpoints:(builder) => ({ 
         getProducts: builder.query({ // query is used to fetch data from the server
-            query: ({pageNumber}) => ({
+            query: ({keyword,pageNumber}) => ({
             url : PRODUCTS_URL, // the url to fetch the data from
-            params: {pageNumber}, // the page number to fetch the data from
+            params: {pageNumber, // the page number to fetch the data from
+                keyword, // the parameters to pass to the url
+            },
         }),
         keepUnusedDataFor:5, // keep the data for 5 minutes even if it is not being used(stored data in catche for 5 minutes)
         providesTags: ['products'], // it provides the tag to the data so that we can invalidate the data when we update the data
@@ -51,7 +53,13 @@ export const productApiSlice = apiSlice.injectEndpoints({ //it will enject endpo
           body: data,
         }),
         invalidatesTags: ['Product'],
-      }),  
+      }), 
+      getTopProducts: builder.query({
+        query: () => ({ 
+            url: `${PRODUCTS_URL}/top`, // api/products/top
+         }), 
+        keepUnusedDataFor: 5,
+    }), 
     }),
 });
 
@@ -61,4 +69,5 @@ export const { useGetProductsQuery, useGetProductDetailsQuery,
     useUploadProductImageMutation,
     useDeleteProductMutation,
     useCreateReviewMutation,
+    useGetTopProductsQuery,
     } = productApiSlice; // export the hook to use it in the component

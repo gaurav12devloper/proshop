@@ -30,20 +30,28 @@ const HomeScreen = () => {
 export default HomeScreen */
 
 import { Row, Col } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Product from '../components/Product'; // component
 import { useGetProductsQuery } from '../slices/productsApiSlice.js';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
+import ProductCarousel from '../components/ProductCarausel';
 const HomeScreen = () => {
 
   //{orginal-name: rename-variable} like {data: products}
-  const { pageNumber } = useParams(); // get the pageNumber from the url
-  const { data, isLoading, error } = useGetProductsQuery({pageNumber}); // 
+  const { pageNumber,keyword } = useParams(); // get the pageNumber from the url
+  const { data, isLoading, error } = useGetProductsQuery({pageNumber, keyword}); // 
 
   return (
     <> 
+    { !keyword && (
+      <ProductCarousel />
+    )}
+    {
+      keyword && (
+        <Link to='/' className='btn btn-light mb-4'>Go Back</Link>
+      )}
     { isLoading ? (<Loader />)
      : error ? (<message variant='danger'>{error?.data?. Message || error.error} </message>) : 
      (
@@ -56,7 +64,7 @@ const HomeScreen = () => {
                 </Col>
             ))} 
         </Row>
-        <Paginate pages={data.pages} page={data.page} />
+        <Paginate pages={data.pages} page={data.page} keyword={keyword? keyword: ''} />
         </>
      )}
     </>
