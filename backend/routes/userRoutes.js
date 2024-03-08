@@ -18,5 +18,4 @@ router.post('/logout',logoutUser);
 router.route('/auth').post(authUser);
 router.route('/profile').get(protect,getuserProfle).put(protect,updateuserProfle); // protect middleware is use for checking whether user is valid or not
 router.route('/:id').delete(deleteUser).get(protect,admin,getUserById).put(protect,admin,updateUser); // admin middleware is use for checking whether user is admin or not
-
 export default router;

@@ -31,8 +31,42 @@ export const usersApiSlice = apiSlice.injectEndpoints({ //it will enject endpoin
           body: data,
         }),
       }),
+      getUsers: builder.query({
+        query: () => ({
+          url: `${USERS_URL}`, // send request for all users /api/users
+        }),
+        providesTags: ['User'],
+        keepUnusedDataFor: 5,
+      }),
+      deleteUser: builder.mutation({
+        query: (userId) => ({
+          url: `${USERS_URL}/${userId}`, // send request for delete user /api/users/:id
+          method: 'DELETE',
+        }),
+        invalidatesTags: ['User'],
+      }),
+      getUserDetails: builder.query({
+        query: (userId) => ({
+          url: `${USERS_URL}/${userId}`, // send request for user details /api/users/:id
+        }),
+        keepUnusedDataFor: 5,
+      }),
+      updateUser: builder.mutation({
+        query: (data) => ({
+          url: `/${USERS_URL}/${data.userId}`, // send request for update user /api/users/:id
+          method: 'PUT',
+          body: data,
+        }),
+        invalidatesTags: ['User'],
+      }),
      
     }),
 });
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useProfileMutation} = usersApiSlice; // export the hook to use it in the component
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation,
+     useProfileMutation,
+    useGetUsersQuery,
+    useDeleteUserMutation,
+    useGetUserDetailsQuery,
+    useUpdateUserMutation,
+    } = usersApiSlice; // export the hook to use it in the component
