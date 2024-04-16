@@ -37,6 +37,13 @@ const __dirname = path.resolve(); // to use __dirname in ES6
 console.log(__dirname); 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads'))); // to make the uploads folder static
 
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, '/frontend/build')));
+    // app route that is not api will route to index.html
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+    );
+}
+
 app.use(notFound);  // if we reach this point, it means that the request is not found
 app.use(errorHandler); // if we reach this point, it means that there is an error
 
