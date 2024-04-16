@@ -1,7 +1,8 @@
-import path from 'path';
+
 import express from 'express';
 import dotenv from 'dotenv'; // to use .env file for that 
 dotenv.config();
+
 import connectDB from './config/db.js';
 import { notFound, errorHandler} from './middleware/errorMiddleware.js';
 //import products from './data/products.js';
@@ -12,12 +13,9 @@ import cookieParser from 'cookie-parser';
 import orderRoutes from './routes/orderRoutes.js';
 const port = process.env.PORT || 5000;
 const app = express();
+import path from 'path';
 
 connectDB();
-
-app.get('/', (req, res) => {
-    res.send('Server is ready');
-});
 
 // Body parser midlleware
 app.use(express.json());
@@ -37,15 +35,18 @@ const __dirname = path.resolve(); // to use __dirname in ES6
 console.log(__dirname); 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads'))); // to make the uploads folder static
 
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, '/frontend/build')));
-    // app route that is not api will route to index.html
-    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-    );
-}
 
+if(process.env.NODE_ENV == 'production'){
+    app.use(express.static(path.join(__dirname, '/frontend/build')));
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname, 'frontend/build/index.html')); 
+    })
+
+}
 app.use(notFound);  // if we reach this point, it means that the request is not found
 app.use(errorHandler); // if we reach this point, it means that there is an error
+
+
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
